@@ -1,0 +1,83 @@
+unit Forma_LCD;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  Vcl.StdCtrls,ShellAPI;
+
+type
+  TFormaLCD = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Image1: TImage;
+    Image2: TImage;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    editPrograma: TEdit;
+    editTexto: TEdit;
+    Memo1: TMemo;
+    Label5: TLabel;
+    Label6: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Image3: TImage;
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    emu86,enter,APOSTROFE,INICIO,FIN,programa: String;
+    Archivo: TextFile;
+    prog,mensaje: String;
+  end;
+
+var
+  FormaLCD: TFormaLCD;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormaLCD.Button1Click(Sender: TObject);
+begin
+  try
+    prog := 'C:\Users\sophi\Downloads\'+editPrograma.Text+'.asm';
+    mensaje := editTexto.Text;
+      if(Length(prog)<>0) and (Length(mensaje)<>0) then
+      begin
+          emi86 :='.MODEL SMALL' +ENTER+
+                        '.STACK' +ENTER+
+                        '.DATA' +ENTER+
+                        '    CADENA  DB ' +ENTER+
+                        '.CODE ' +ENTER+
+                        '    MOV AX,@DATA' +ENTER+
+                        '    MOV DS,AX' +ENTER+
+                        '    MOV SI,0 ' +ENTER+
+                        '    MOV CX,"+longitud+' +ENTER+
+                        '    MOV DX,2040H ' +ENTER+
+                        'LABEL01:' +ENTER+
+                        '    MOV AL,MANSAJE[SI]' +ENTER+
+                        '    OUT DX,AL ' +ENTER+
+                        '    INC SI' +ENTER+
+                        '    INC DX' +ENTER+
+                        '    LOOP LABEL01 ' +ENTER+
+                        '    MOV AX,4C00H' +ENTER+
+                        '    INT 21H' +ENTER+
+                        'END';
+      end;
+  except
+        showMessage('Error al crear el archivo LCD .asm');
+  end; //fin try
+end;
+
+procedure TFormaLCD.Button2Click(Sender: TObject);
+begin
+  close;
+end;
+
+end.
