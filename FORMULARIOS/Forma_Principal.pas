@@ -27,6 +27,7 @@ type
     procedure BitBtn3Click(Sender: TObject);
     procedure BitBtn5Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,6 +56,17 @@ begin
     showMessage('No se encontro la aplicacion');
   end;
 
+end;
+
+procedure TFormaPrincipal.BitBtn2Click(Sender: TObject);
+begin
+  try
+    ShellExecute(Handle, 'open',
+      'https://drive.google.com/file/d/1tbeHQowYvVFI_CFOugaN8N-QdgtinWBK/view?usp=sharing',
+      nil, nil, SW_SHOWNORMAL);
+  except
+    ShowMessage('No se pudo abrir el link');
+  end;
 end;
 
 procedure TFormaPrincipal.BitBtn3Click(Sender: TObject);

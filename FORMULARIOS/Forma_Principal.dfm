@@ -2158,6 +2158,7 @@ object FormaPrincipal: TFormaPrincipal
       Layout = blGlyphTop
       ParentFont = False
       TabOrder = 3
+      OnClick = BitBtn2Click
     end
     object BitBtn3: TBitBtn
       Left = 112
